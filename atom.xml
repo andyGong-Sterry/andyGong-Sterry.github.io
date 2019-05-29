@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-05-29T11:27:04.799Z</updated>
+  <updated>2019-05-29T11:31:00.005Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>post title with whitespace</title>
+    <title>(Spring Cloud微服务实战-书中之坑)分布式服务跟踪：Spring Cloud Sleuth 快速入门</title>
     <link href="http://yoursite.com/2019/05/27/post-title-with-whitespace/"/>
     <id>http://yoursite.com/2019/05/27/post-title-with-whitespace/</id>
     <published>2019-05-27T03:47:30.000Z</published>
-    <updated>2019-05-29T11:27:04.799Z</updated>
+    <updated>2019-05-29T11:31:00.005Z</updated>
     
     <content type="html"><![CDATA[<p>按照书中的快速入门案例，在pom.xml文件中加入eureka和ribbon依赖</p><pre><code>&lt;artifactId&gt;spring-cloud-starter-eureka&lt;/artifactId&gt;&lt;artifactId&gt;spring-cloud-starter-ribbon&lt;/artifactId&gt;</code></pre><p>分别实现trace-1和trace-2接口，发送POST请求出错：<br><br></p><p><html><body><h1>Whitelabel Error Page</h1><p>This application has no explicit mapping for /error, so you are seeing this as a fallback.</p><div id="created">Wed May 15 20:39:45 CST 2019</div><div>There was an unexpected error (type=Method Not Allowed, status=405).</div><div>Request method &#39;POST&#39; not supported</div></body></html><br><br><br>解决办法：<br>依赖改为：<br></p><p><artifactid>spring-cloud-starter-netflix-eureka-server</artifactid><br></p><p><artifactid>spring-cloud-starter-netflix-ribbon</artifactid><br><br><br><br>只需要把trace1的RequestMethod.GET改为POST即可，trace2不需要改<br><br>@RequestMapping(value = “/trace-1”, method = RequestMethod.POST)<br><br>    public String trace(){<br><br>        System.out.println(“===call trace-1===”);<br><br>        return restTemplate().getForEntity(“<a href="http://TRACE-2/trace-2&quot;" target="_blank" rel="noopener">http://TRACE-2/trace-2&quot;</a>, String.class).getBody();<br>    }<br><br><br> @RequestMapping(value = “/trace-2”, method = RequestMethod.GET)<br><br>    public String trace(){<br><br>        System.out.println(“===<call trace-2>===”);<br><br>        return “Trace”;<br><br>    }<br><br>    版本问题是个令人头疼的问题，书中也有各种坑ヽ(ー_ー)ノ</call></p>]]></content>
     
