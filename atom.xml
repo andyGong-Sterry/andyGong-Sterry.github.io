@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-05-31T12:36:53.576Z</updated>
+  <updated>2019-05-31T12:46:02.522Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,9 +21,19 @@
     <link href="http://yoursite.com/2019/05/31/mysql5-7-23%E4%BF%AE%E6%94%B9root%E5%AF%86%E7%A0%81/"/>
     <id>http://yoursite.com/2019/05/31/mysql5-7-23修改root密码/</id>
     <published>2019-05-31T12:36:53.000Z</published>
-    <updated>2019-05-31T12:36:53.576Z</updated>
+    <updated>2019-05-31T12:46:02.522Z</updated>
+    
+    <content type="html"><![CDATA[<p>1.官网下载mysql-5.7.23-winx64.zip， 不是installer;</p><p>2.解压缩，配置环境变量-&gt;bin/</p><p>3.解压的目录下新建my.ini,以下内容：</p><p>[mysqld]<br>basedir=D:\Program Files\mysql-5.7\<br>datadir=D:\Program Files\mysql-5.7\data\<br>port=3306<br>skip-grant-tables</p><p>#basedir表示mysql安装路径</p><p>#datadir表示mysql数据文件存储路径</p><p>#port表示mysql端口</p><p>#skip-grant-tables表示忽略密码<br>4.administrator-&gt;cmd:<br>6.启动管理员模式下的CMD，并将路径切换至mysql下的bin目录，然后输入 mysqld –install 安装mysql<br>7.输入 net start mysql 启动mysql服务<br>8.再输入 mysqld –initialize-insecure –user=mysql; 初始化数据文件<br>9.然后再次启动mysql 然后用命令 mysql –u root –p 进入mysql管理界面（密码可为空）<br>10.进入界面后更改root密码：update mysql.user set authentication_string=password(‘123456’) where user=’root’ and Host = ‘localhost’;<br>11.输入flush privileges 刷新权限<br>12.修改 my.ini文件删除最后一句skip-grant-tables<br>13.输入exit退出；<br>14.再次输入mysql -u root -p; 输入密码123456就可以登录啦！！！</p>]]></content>
     
     <summary type="html">
+    
+      
+      
+        &lt;p&gt;1.官网下载mysql-5.7.23-winx64.zip， 不是installer;&lt;/p&gt;
+&lt;p&gt;2.解压缩，配置环境变量-&amp;gt;bin/&lt;/p&gt;
+&lt;p&gt;3.解压的目录下新建my.ini,以下内容：&lt;/p&gt;
+&lt;p&gt;[mysqld]&lt;br&gt;basedir=D:\Prog
+      
     
     </summary>
     
