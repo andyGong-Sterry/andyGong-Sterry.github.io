@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="Jiang ChuanHan">
+  
+  
+  <title>Java中抽象类和接口存在的意义与价值 | 江传汉的个人网站</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Hexo, Theme-AD">
+  
+
+  
+  <meta name="description" content="江传汉的小站">
+
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+    <script src="//unpkg.com/valine/dist/Valine.min.js" async></script>
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":true,"count":true},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2019-05-29",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Jiang ChuanHan",
+    share: {"twitter":true,"facebook":true,"weibo":true,"qq":true,"wechat":true},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">Sterry</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 放羊的砍柴人</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="https://godbmw.com/design-patterns/" target="_blank">设计模式手册</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/friends/" target="_self">友链</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/andyGong-Sterry/" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="https://godbmw.com/design-patterns/" target="_blank">
+            设计模式手册
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/friends/" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2019-06-04
+    </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    Java中抽象类和接口存在的意义与价值
+  </h1>
+  
+  <article class="passage-article">
+    <p>首先简单的介绍一下抽象类：</p>
+<p>定义是很简单的，我们这里不写官方的语言，我自己看着都烦，我们就用白话介绍，抽象类本质是一个类，没问题，那么类里面一般都是有方法的，方法包括方法名和方法体，这是常识对不对，那么什么是抽象类呢？如果一个类里面有一种方法只有方法名却没有方法体，这样的类就是抽象类！</p>
+<p>举个例子：</p>
+<p>public abstract class TestAbstract {<br>    //这是一个抽象方法，<br>    public abstract void run();<br>    //当然这里面也可以是普通的方法<br>    public void eat() {<br>        System.out.println(“我是一个在抽象类里面的普通方法”);<br>    }<br>}</p>
+<p>这里为了区别普通的类，我们一般加abstract这个关键字，我们就认为他是一个抽象类。既然是一个类，那么普通类的属性他都有，它也可以写普通的方法。</p>
+<p>这里就有人说了，那这个有什么用呢？没有实现体，就是调用也没用啊，JDK也想到这个了，所以呢他是不让你直接实例化调用的，因为没用啊，对吧，这也是为什么抽象类不可以直接实例化自己，这里说实例化自己有些人不明白，说人话就是不可以自己创建一个自己的对象出来，他只能是子类的引用来创建父类的对象。</p>
+<p>举个例子：</p>
+<pre><code>public static void main(String[] args) {
+    /**
+     * 抽象类是不可以自己实例化自己的，只能实例化自己的子类，因为只有子类才有方法的实现，自己实例化自己是没有意义的。况且就是自己
+     * 里面有普通方法的实现，他的子类都是可以使用的。
+     */
+    TestAbstract t = new TestA01();
+}
+</code></pre><p>回到之前的话题，既然有些方法不可以实现，写了做什么呢？难道就为了那几个可以实现的方法？当然不是的，这里的抽象类是为了子类更好的实现。</p>
+<p>我们举个简单的例子：我们有一个动物的类，里面有一个Run的方法，这个时候我们需要继承他，一只狗说我会跑，老虎说我也会跑，孔雀说我也会跑，这个时候每一个子类都要继承他，而且由于Run方法已经被父类实现了，所以每一个都要重写方法体，是不是很麻烦，这个时候JDK就说了，既然那么多类需要继承他，我直接不实现这个方法，你们谁用谁实现算了。这个就是抽象类存在的意义！</p>
+<p>说的比较官方一些的话，就是抽象类可以将设计和实现分离，你写你的抽象类，我写我的实现方法。这也是为什么说抽象方法必须被继承才有意义！</p>
+<p>举个例子：</p>
+<p>class TestA01 extends TestAbstract{<br>    /**</p>
+<pre><code> * @Override 是注解，JDK5.0以后的新特性，重写的意思，也就是说，如果是注解了的话，就是重写的方法，名字是不可以改的， 如果去掉注解，说明不是重写的方法
+ * 名字是可以改掉的。
+ */
+@Override
+public void run() {
+    System.out.println(&quot;我是子类的run()&quot;);
+}
+</code></pre><p>}</p>
+<p>总结一下：</p>
+<p>有抽象方法的类必然是抽象类<br>抽象类不可以被实例化，不能被new来实例化抽象类<br>抽象类可以包含属性，方法，构造方法，但是构造方法不能用来new实例，只能被子类调用<br>抽象类只能用来继承<br>抽象类的抽象方法必须被子类继承</p>
+<p>下面我们说一下接口：</p>
+<p>接口是我觉得Java里面相当伟大的一个发明，为什么呢？听我说完，接口我们可以认为本质也是一个类，只是修饰符改为了interface，类的修饰符是Class而已，那么接口是干嘛呢？前面讲了抽象类的使用，接口就是一个比抽象类还要抽象的类，前面说抽象类里面可以写普通的方法，说明还不够抽象，抽象的不够彻底，接口说干脆一不做二不休，规定只能写抽象方法算了，所以说接口是比抽象方法更抽象的类。</p>
+<p>举个例子：</p>
+<p>public interface MyIinterface {<br>    /**</p>
+<pre><code> * 接口里面只有常量和抽象方法
+ */
+/*public static final   接口中常量定义时都有这个，写不写都是这样*/String MAX_GREAD = &quot;BOSS&quot;;
+int MAX_SPEED = 120;
+/*public abstatic  这里一样写不写都是public，因为不用public的话没有意义*/ void test01();
+public int test02(int a, int b);
+</code></pre><p>}</p>
+<p>有的人说不能被继承，不是和抽象类一样吗？为什么不写abstract关键字呢？不能被普通方法调用，不是静态变量吗？是的，说的都对，所以JDK这里不管你写不写，都是默认前面有这些修饰词的，上面我写的很明白！</p>
+<p>上面有句话说不同public的话没有意义，其实写到这里我们可以基本认为接口和抽象类是一种规则了，它规定你这样用，你只要继承或者实现，就必须要按照他的来，所以我们对应到现实生活中的话，就是说是一种规则，既然是规则就是给别人看的，你一个公司制定出来了规章制度，不公布，别人怎么遵守？一个道理，如果不用public修饰别人引用不到，和不规定是一样的。所以JDK也明白，所以这里的方法你写不写public他都默认帮你加上！</p>
+<p>下面讲实现</p>
+<p>我们说了，抽象类也好，接口也好，不继承，不实现都是没有意义的，但是因为接口里面只有抽象方法，所以他必须被实现才有意义，不然就会被垃圾回收机制System.gc给回收掉，前面的文章说过了垃圾回收的原理，这里不做赘述，但是为什么不继承呢？有人说了？既然要被实现里面的方法，直接继承不行了吗？是的，但是类的继承只能是单继承，所以，如果一个类里面有很多的接口，怎么做？所以只能是实现！</p>
+<p>但是有人说了，如果很多接口，最后一个继承了上面的所有接口，那我实现的时候是不是需要实现所有接口的方法？答案是肯定的：</p>
+<p>举个例子：</p>
+<p>package com.gaojizu.TestInterface;<br>/**</p>
+<ul>
+<li>测试接口的多继承</li>
+<li><p>@author admin<br><em>
+</em>/<br>public interface InterFaceA {</p>
+<p> void aaa();<br>}<br>/**</p>
+</li>
+<li>接口B</li>
+<li>@author admin<br><em>
+</em>/<br>interface InterFaceB{<br> void bbb();<br>}<br>/**</li>
+<li>接口C</li>
+<li>@author admin<br><em>
+</em>/<br>interface InterFaceC extends InterFaceA,InterFaceB{<br> void ccc();<br>}<br>/**</li>
+<li>实现类</li>
+<li><p>@author admin<br><em>
+</em>/<br>class TestClass implements InterFaceC{</p>
+<p> @Override<br> public void aaa() {</p>
+<pre><code>System.out.println(&quot;TestClass.aaa()&quot;);
+</code></pre><p> }</p>
+<p> @Override<br> public void bbb() {</p>
+<pre><code>System.out.println(&quot;TestClass.bbb()&quot;);
+</code></pre><p> }</p>
+<p> @Override<br> public void ccc() {</p>
+<pre><code>System.out.println(&quot;TestClass.ccc()&quot;);
+</code></pre><p> }</p>
+</li>
+</ul>
+<p>}</p>
+<p>其实这里也不难理解，继承了就是拥有了父接口的抽象方法，自然就必须实现他。</p>
+<p>那有人说了，我这里如果在子类里面声明了一个变量，那我直接用父接口的对象调用行不行呢？</p>
+<p>举个例子：</p>
+<p>class Plane implements FlyAble{</p>
+<pre><code>String name;
+@Override
+public void fly() {
+    System.out.println(&quot;我可以飞&quot;);
+
+}
+</code></pre><p>}</p>
+<p>这里有一个name，我测试的时候是不是可以直接使用呢？当然不是，需要强制转换：</p>
+<p>看例子：</p>
+<pre><code>public static void main(String[] args) {
+    /**
+     * 这里的接口是不可以自己实例化自己的，原因和抽象类是一样的，里面只有抽象方法，没有实现的，所以是实例化没有意义的
+     * 那么直接f是不可以调出子类里面的属性的，原因很简单，他是FlyAble的对象，那么他就只能找到自己下面的属性和方法
+     * 是没有办法知道子类的属性和方法的，想知道的话，就强制转换为子类的对象就行了。下面是例子
+     */
+    FlyAble f = new Plane();
+    //强制转换为Plane类
+    Plane p = (Plane)f;
+    p.name = &quot;test&quot;;
+}
+</code></pre><p>其实这里用我们生活中的例子也是一样可以理解的，我们有一个会飞的类，他创建了一个天鹅的对象出来，天鹅说我会下蛋，那按照我们代码的逻辑来想，会飞的应该都会下蛋，显然不是，飞机也会飞，但是不会下蛋，怎么可以下蛋呢？将实例化出来的对象给一个具体使用的类，也就是天鹅！这里也是多态的一个体现，你给一个笼统的概念，然后具体的使用是什么就是什么的思想！</p>
+<p>最后一点：实现是可以多实现的！</p>
+<p>前面我们说接口的继承是可以多继承的，看明白，是接口可以多继承，类一样是单继承，实现是可以多实现的，你说我既可以飞，也可以跑，飞和跑在两个接口里面怎么办？可以同时实现：</p>
+<p>看例子：</p>
+<p>public interface FlyAble {</p>
+<pre><code>int MAX_SPEED = 11000;
+int MIN_SPEED = 1;
+void fly();
+</code></pre><p>}<br>/**</p>
+<ul>
+<li>攻击的接口</li>
+<li>@author admin<br><em>
+</em>/<br>interface Attack{<br> void tack();<br>}</li>
+</ul>
+<p>class Plane implements FlyAble{</p>
+<pre><code>String name;
+@Override
+public void fly() {
+    System.out.println(&quot;我可以飞&quot;);
+
+}
+</code></pre><p>}<br>/**</p>
+<ul>
+<li>可以实现多个接口</li>
+<li><p>@author admin<br><em>
+</em>/<br>class men implements FlyAble,Attack{</p>
+<p> @Override<br> public void tack() {</p>
+<pre><code>System.out.println(&quot;我可以攻击&quot;);
+</code></pre><p> }</p>
+<p> @Override<br> public void fly() {</p>
+<pre><code>System.out.println(&quot;我可以飞&quot;);
+</code></pre><p> }</p>
+</li>
+</ul>
+<p>}</p>
+<p>那么接口存在的意义就不用说了吧，很明显了，为了更好的将设计与实现分离。</p>
+<p>设计师写完需要的接口，别的不用管了，怎么实现是下面的事情了，这样不仅仅可以提高开发效率，也可以更好的维护。当然如果只有一个人开发，那就没必要分接口和类了！</p>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: 江传汉</div>
+      
+        <div>
+          原文链接: 
+          <a href target="_blank">http://yoursite.com/2019/06/04/Java中抽象类和接口存在的意义与价值/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+</div>
+
+    </main>
+    
+      
+<div class="site-comment-contanier" data-plateform="leancloud">
+  
+    <p id="site-comment-info">
+      <i class="fa fa-spinner fa-spin"></i> 评论加载中
+    </p>
+    <div id="site-comment"></div>
+  
+</div>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+      
+        <div class="site-footer-col">
+          <h5 class="site-footer-title">博客推荐</h5>
+          
+            <span class="site-footer-item">
+              <a href="https://godbmw.com/" target="_blank">GodBMW</a>
+            </span>
+          
+            <span class="site-footer-item">
+              <a href="http://ruanyifeng.com/" target="_blank">江传汉的个人网站</a>
+            </span>
+          
+        </div>
+      
+        <div class="site-footer-col">
+          <h5 class="site-footer-title">系列教程</h5>
+          
+            <span class="site-footer-item">
+              <a href="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/" target="_blank">webpack4系列教程</a>
+            </span>
+          
+        </div>
+      
+        <div class="site-footer-col">
+          <h5 class="site-footer-title">抓到我</h5>
+          
+            <span class="site-footer-item">
+              <a href="https://juejin.im/user/5b91fcf06fb9a05d3c7fd4a5" target="_blank">掘金</a>
+            </span>
+          
+            <span class="site-footer-item">
+              <a href="https://segmentfault.com/" target="_blank">思否</a>
+            </span>
+          
+        </div>
+      
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: jch429701725@sina.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+        <div class="site-layer-reward" id="site-layer-reward" style="display: none;">
+          
+            <div>
+              <img src="/images/wechat.png" alt="WeChat">
+              
+                <p>WeChat</p>
+              
+            </div>
+          
+            <div>
+              <img src="/images/alipay.jpg" alt="AliPay">
+              
+                <p>AliPay</p>
+              
+            </div>
+          
+        </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="javascript:void(0);" data-enable="false">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2019/05/31/mysql5-7-23修改root密码/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+      <a href="#site-comment" data-enable="true">
+        <i class="fa fa-commenting"></i>
+      </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+      <a href="javascript:void(0);" id="site-reward">
+        <i class="fa fa-thumbs-up"></i>
+      </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+    <a id="share-btn-twitter" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-twitter"></i>
+    </a>
+  
+  
+    <a id="share-btn-facebook" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-facebook"></i>
+    </a>
+  
+  
+    <a id="share-btn-weibo" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-weibo"></i>
+    </a>
+  
+  
+    <a id="share-btn-qq" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-qq"></i>
+    </a>
+  
+  
+    <a id="share-btn-wechat" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-wechat"></i>
+    </a>
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>
