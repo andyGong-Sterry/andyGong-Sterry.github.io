@@ -186,10 +186,7 @@
   </h1>
   
   <article class="passage-article">
-    <p><link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css"></p>
-<script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
-
-<p>首先简单的介绍一下抽象类：</p>
+    <p>首先简单的介绍一下抽象类：</p>
 <p>定义是很简单的，我们这里不写官方的语言，我自己看着都烦，我们就用白话介绍，抽象类本质是一个类，没问题，那么类里面一般都是有方法的，方法包括方法名和方法体，这是常识对不对，那么什么是抽象类呢？如果一个类里面有一种方法只有方法名却没有方法体，这样的类就是抽象类！</p>
 <p>举个例子：</p>
 <pre><code class="java">public abstract class TestAbstract {
@@ -233,109 +230,155 @@
 <p>下面我们说一下接口：</p>
 <p>接口是我觉得Java里面相当伟大的一个发明，为什么呢？听我说完，接口我们可以认为本质也是一个类，只是修饰符改为了interface，类的修饰符是Class而已，那么接口是干嘛呢？前面讲了抽象类的使用，接口就是一个比抽象类还要抽象的类，前面说抽象类里面可以写普通的方法，说明还不够抽象，抽象的不够彻底，接口说干脆一不做二不休，规定只能写抽象方法算了，所以说接口是比抽象方法更抽象的类。</p>
 <p>举个例子：</p>
-<p>public interface MyIinterface {<br>    /**</p>
-<pre><code> * 接口里面只有常量和抽象方法
- */
-/*public static final   接口中常量定义时都有这个，写不写都是这样*/String MAX_GREAD = &quot;BOSS&quot;;
-int MAX_SPEED = 120;
-/*public abstatic  这里一样写不写都是public，因为不用public的话没有意义*/ void test01();
-public int test02(int a, int b);
-</code></pre><p>}</p>
+<pre><code class="java">public interface MyIinterface {
+    /**
+     * 接口里面只有常量和抽象方法
+     */
+    /*public static final   接口中常量定义时都有这个，写不写都是这样*/String MAX_GREAD = &quot;BOSS&quot;;
+    int MAX_SPEED = 120;
+    /*public abstatic  这里一样写不写都是public，因为不用public的话没有意义*/ void test01();
+    public int test02(int a, int b);
+
+}
+</code></pre>
 <p>有的人说不能被继承，不是和抽象类一样吗？为什么不写abstract关键字呢？不能被普通方法调用，不是静态变量吗？是的，说的都对，所以JDK这里不管你写不写，都是默认前面有这些修饰词的，上面我写的很明白！</p>
 <p>上面有句话说不同public的话没有意义，其实写到这里我们可以基本认为接口和抽象类是一种规则了，它规定你这样用，你只要继承或者实现，就必须要按照他的来，所以我们对应到现实生活中的话，就是说是一种规则，既然是规则就是给别人看的，你一个公司制定出来了规章制度，不公布，别人怎么遵守？一个道理，如果不用public修饰别人引用不到，和不规定是一样的。所以JDK也明白，所以这里的方法你写不写public他都默认帮你加上！</p>
 <p>下面讲实现</p>
 <p>我们说了，抽象类也好，接口也好，不继承，不实现都是没有意义的，但是因为接口里面只有抽象方法，所以他必须被实现才有意义，不然就会被垃圾回收机制System.gc给回收掉，前面的文章说过了垃圾回收的原理，这里不做赘述，但是为什么不继承呢？有人说了？既然要被实现里面的方法，直接继承不行了吗？是的，但是类的继承只能是单继承，所以，如果一个类里面有很多的接口，怎么做？所以只能是实现！</p>
 <p>但是有人说了，如果很多接口，最后一个继承了上面的所有接口，那我实现的时候是不是需要实现所有接口的方法？答案是肯定的：</p>
 <p>举个例子：</p>
-<p>package com.gaojizu.TestInterface;<br>/**</p>
-<ul>
-<li>测试接口的多继承</li>
-<li><p>@author admin<br><em>
-</em>/<br>public interface InterFaceA {</p>
-<p> void aaa();<br>}<br>/**</p>
-</li>
-<li>接口B</li>
-<li>@author admin<br><em>
-</em>/<br>interface InterFaceB{<br> void bbb();<br>}<br>/**</li>
-<li>接口C</li>
-<li>@author admin<br><em>
-</em>/<br>interface InterFaceC extends InterFaceA,InterFaceB{<br> void ccc();<br>}<br>/**</li>
-<li>实现类</li>
-<li><p>@author admin<br><em>
-</em>/<br>class TestClass implements InterFaceC{</p>
-<p> @Override<br> public void aaa() {</p>
-<pre><code> System.out.println(&quot;TestClass.aaa()&quot;);
-</code></pre><p> }</p>
-<p> @Override<br> public void bbb() {</p>
-<pre><code> System.out.println(&quot;TestClass.bbb()&quot;);
-</code></pre><p> }</p>
-<p> @Override<br> public void ccc() {</p>
-<pre><code>System.out.println(&quot;TestClass.ccc()&quot;);
-</code></pre><p> }</p>
-</li>
-</ul>
-<p>}</p>
+<pre><code class="java">package com.gaojizu.TestInterface;
+/**
+ * 测试接口的多继承
+ * @author admin
+ *
+ */
+public interface InterFaceA {
+
+    void aaa();
+}
+/**
+ * 接口B
+ * @author admin
+ *
+ */
+interface InterFaceB{
+    void bbb();
+}
+/**
+ * 接口C
+ * @author admin
+ *
+ */
+interface InterFaceC extends InterFaceA,InterFaceB{
+    void ccc();
+}
+/**
+ * 实现类
+ * @author admin
+ *
+ */
+class TestClass implements InterFaceC{
+
+    @Override
+    public void aaa() {
+        System.out.println(&quot;TestClass.aaa()&quot;);
+
+    }
+
+    @Override
+    public void bbb() {
+        System.out.println(&quot;TestClass.bbb()&quot;);
+
+    }
+
+    @Override
+    public void ccc() {
+       System.out.println(&quot;TestClass.ccc()&quot;);
+
+    }
+
+}
+</code></pre>
 <p>其实这里也不难理解，继承了就是拥有了父接口的抽象方法，自然就必须实现他。</p>
 <p>那有人说了，我这里如果在子类里面声明了一个变量，那我直接用父接口的对象调用行不行呢？</p>
 <p>举个例子：</p>
-<p>class Plane implements FlyAble{</p>
-<pre><code>String name;
-@Override
-public void fly() {
-    System.out.println(&quot;我可以飞&quot;);
+<pre><code class="java">class Plane implements FlyAble{
+
+    String name;
+    @Override
+    public void fly() {
+        System.out.println(&quot;我可以飞&quot;);
+
+    }
 
 }
-</code></pre><p>}</p>
+</code></pre>
 <p>这里有一个name，我测试的时候是不是可以直接使用呢？当然不是，需要强制转换：</p>
 <p>看例子：</p>
-<pre><code>public static void main(String[] args) {
-    /**
-     * 这里的接口是不可以自己实例化自己的，原因和抽象类是一样的，里面只有抽象方法，没有实现的，所以是实例化没有意义的
-     * 那么直接f是不可以调出子类里面的属性的，原因很简单，他是FlyAble的对象，那么他就只能找到自己下面的属性和方法
-     * 是没有办法知道子类的属性和方法的，想知道的话，就强制转换为子类的对象就行了。下面是例子
-     */
-    FlyAble f = new Plane();
-    //强制转换为Plane类
-    Plane p = (Plane)f;
-    p.name = &quot;test&quot;;
-}
-</code></pre><p>其实这里用我们生活中的例子也是一样可以理解的，我们有一个会飞的类，他创建了一个天鹅的对象出来，天鹅说我会下蛋，那按照我们代码的逻辑来想，会飞的应该都会下蛋，显然不是，飞机也会飞，但是不会下蛋，怎么可以下蛋呢？将实例化出来的对象给一个具体使用的类，也就是天鹅！这里也是多态的一个体现，你给一个笼统的概念，然后具体的使用是什么就是什么的思想！</p>
+<pre><code class="java">    public static void main(String[] args) {
+        /**
+         * 这里的接口是不可以自己实例化自己的，原因和抽象类是一样的，里面只有抽象方法，没有实现的，所以是实例化没有意义的
+         * 那么直接f是不可以调出子类里面的属性的，原因很简单，他是FlyAble的对象，那么他就只能找到自己下面的属性和方法
+         * 是没有办法知道子类的属性和方法的，想知道的话，就强制转换为子类的对象就行了。下面是例子
+         */
+        FlyAble f = new Plane();
+        //强制转换为Plane类
+        Plane p = (Plane)f;
+        p.name = &quot;test&quot;;
+    }
+</code></pre>
+<p>其实这里用我们生活中的例子也是一样可以理解的，我们有一个会飞的类，他创建了一个天鹅的对象出来，天鹅说我会下蛋，那按照我们代码的逻辑来想，会飞的应该都会下蛋，显然不是，飞机也会飞，但是不会下蛋，怎么可以下蛋呢？将实例化出来的对象给一个具体使用的类，也就是天鹅！这里也是多态的一个体现，你给一个笼统的概念，然后具体的使用是什么就是什么的思想！</p>
 <p>最后一点：实现是可以多实现的！</p>
 <p>前面我们说接口的继承是可以多继承的，看明白，是接口可以多继承，类一样是单继承，实现是可以多实现的，你说我既可以飞，也可以跑，飞和跑在两个接口里面怎么办？可以同时实现：</p>
 <p>看例子：</p>
-<p>public interface FlyAble {</p>
-<pre><code>int MAX_SPEED = 11000;
-int MIN_SPEED = 1;
-void fly();
-</code></pre><p>}<br>/**</p>
-<ul>
-<li>攻击的接口</li>
-<li>@author admin<br><em>
-</em>/<br>interface Attack{<br> void tack();<br>}</li>
-</ul>
-<p>class Plane implements FlyAble{</p>
-<pre><code>String name;
-@Override
-public void fly() {
-    System.out.println(&quot;我可以飞&quot;);
+<pre><code class="java">public interface FlyAble {
+
+    int MAX_SPEED = 11000;
+    int MIN_SPEED = 1;
+    void fly();
+}
+/**
+ * 攻击的接口
+ * @author admin
+ *
+ */
+interface Attack{
+    void tack();
+}
+
+class Plane implements FlyAble{
+
+    String name;
+    @Override
+    public void fly() {
+        System.out.println(&quot;我可以飞&quot;);
+
+    }
 
 }
-</code></pre><p>}<br>/**</p>
-<ul>
-<li>可以实现多个接口</li>
-<li><p>@author admin<br><em>
-</em>/<br>class men implements FlyAble,Attack{</p>
-<p> @Override<br> public void tack() {</p>
-<pre><code> System.out.println(&quot;我可以攻击&quot;);
-</code></pre><p> }</p>
-<p> @Override<br> public void fly() {</p>
-<pre><code> System.out.println(&quot;我可以飞&quot;);
-</code></pre><p> }</p>
-</li>
-</ul>
-<p>}</p>
+/**
+ * 可以实现多个接口
+ * @author admin
+ *
+ */
+class men implements FlyAble,Attack{
+
+    @Override
+    public void tack() {
+        System.out.println(&quot;我可以攻击&quot;);
+
+    }
+
+    @Override
+    public void fly() {
+        System.out.println(&quot;我可以飞&quot;);
+    }
+
+}
+</code></pre>
 <p>那么接口存在的意义就不用说了吧，很明显了，为了更好的将设计与实现分离。</p>
-<p>设计师写完需要的接口，别的不用管了，怎么实现是下面的事情了，这样不仅仅可以提高开发效率，也可以更好的维护。当然如果只有一个人开发，那就没必要分接口和类了！<br>// highlight<br>  hljs.initHighlightingOnLoad();</p>
+<p>设计师写完需要的接口，别的不用管了，怎么实现是下面的事情了，这样不仅仅可以提高开发效率，也可以更好的维护。当然如果只有一个人开发，那就没必要分接口和类了！</p>
 
   </article>
   <aside class="table-content" id="site-toc">
