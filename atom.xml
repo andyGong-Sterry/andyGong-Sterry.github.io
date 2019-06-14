@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>江传汉的个人网站</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2019-06-14T12:18:03.294Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>Sterry</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>test</title>
+    <link href="http://yoursite.com/2019/06/14/test/"/>
+    <id>http://yoursite.com/2019/06/14/test/</id>
+    <published>2019-06-14T12:18:03.000Z</published>
+    <updated>2019-06-14T12:18:03.294Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://yoursite.com/2019/06/14/hello-world/"/>
+    <id>http://yoursite.com/2019/06/14/hello-world/</id>
+    <published>2019-06-14T12:00:28.896Z</published>
+    <updated>2019-06-14T12:00:28.896Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="bash">$ hexo new &quot;My New Post&quot;</code></pre><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="bash">$ hexo server</code></pre><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="bash">$ hexo generate</code></pre><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="bash">$ hexo deploy</code></pre><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Java中抽象类和接口存在的意义与价值</title>
+    <link href="http://yoursite.com/2019/06/04/Java%E4%B8%AD%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3%E5%AD%98%E5%9C%A8%E7%9A%84%E6%84%8F%E4%B9%89%E4%B8%8E%E4%BB%B7%E5%80%BC/"/>
+    <id>http://yoursite.com/2019/06/04/Java中抽象类和接口存在的意义与价值/</id>
+    <published>2019-06-04T12:40:02.000Z</published>
+    <updated>2019-06-14T12:00:28.896Z</updated>
+    
+    <content type="html"><![CDATA[<p>首先简单的介绍一下抽象类：</p><p>定义是很简单的，我们这里不写官方的语言，我自己看着都烦，我们就用白话介绍，抽象类本质是一个类，没问题，那么类里面一般都是有方法的，方法包括方法名和方法体，这是常识对不对，那么什么是抽象类呢？如果一个类里面有一种方法只有方法名却没有方法体，这样的类就是抽象类！</p><p>举个例子：</p><pre><code class="java">public abstract class TestAbstract {    //这是一个抽象方法，    public abstract void run();     //当然这里面也可以是普通的方法    public void eat() {        System.out.println(&quot;我是一个在抽象类里面的普通方法&quot;);    }}</code></pre><p>这里为了区别普通的类，我们一般加abstract这个关键字，我们就认为他是一个抽象类。既然是一个类，那么普通类的属性他都有，它也可以写普通的方法。</p><p>这里就有人说了，那这个有什么用呢？没有实现体，就是调用也没用啊，JDK也想到这个了，所以呢他是不让你直接实例化调用的，因为没用啊，对吧，这也是为什么抽象类不可以直接实例化自己，这里说实例化自己有些人不明白，说人话就是不可以自己创建一个自己的对象出来，他只能是子类的引用来创建父类的对象。</p><p>举个例子：</p><pre><code class="java">    public static void main(String[] args) {        /**         * 抽象类是不可以自己实例化自己的，只能实例化自己的子类，因为只有子类才有方法的实现，自己实例化自己是没有意义的。况且就是自己         * 里面有普通方法的实现，他的子类都是可以使用的。         */        TestAbstract t = new TestA01();    }</code></pre><p>回到之前的话题，既然有些方法不可以实现，写了做什么呢？难道就为了那几个可以实现的方法？当然不是的，这里的抽象类是为了子类更好的实现。</p><p>我们举个简单的例子：我们有一个动物的类，里面有一个Run的方法，这个时候我们需要继承他，一只狗说我会跑，老虎说我也会跑，孔雀说我也会跑，这个时候每一个子类都要继承他，而且由于Run方法已经被父类实现了，所以每一个都要重写方法体，是不是很麻烦，这个时候JDK就说了，既然那么多类需要继承他，我直接不实现这个方法，你们谁用谁实现算了。这个就是抽象类存在的意义！</p><p>说的比较官方一些的话，就是抽象类可以将设计和实现分离，你写你的抽象类，我写我的实现方法。这也是为什么说抽象方法必须被继承才有意义！</p><p>举个例子：</p><pre><code class="java">class TestA01 extends TestAbstract{    /**     * @Override 是注解，JDK5.0以后的新特性，重写的意思，也就是说，如果是注解了的话，就是重写的方法，名字是不可以改的， 如果去掉注解，说明不是重写的方法     * 名字是可以改掉的。     */    @Override    public void run() {        System.out.println(&quot;我是子类的run()&quot;);    }}</code></pre><p>总结一下：</p><p>有抽象方法的类必然是抽象类<br>抽象类不可以被实例化，不能被new来实例化抽象类<br>抽象类可以包含属性，方法，构造方法，但是构造方法不能用来new实例，只能被子类调用<br>抽象类只能用来继承<br>抽象类的抽象方法必须被子类继承</p><p>下面我们说一下接口：</p><p>接口是我觉得Java里面相当伟大的一个发明，为什么呢？听我说完，接口我们可以认为本质也是一个类，只是修饰符改为了interface，类的修饰符是Class而已，那么接口是干嘛呢？前面讲了抽象类的使用，接口就是一个比抽象类还要抽象的类，前面说抽象类里面可以写普通的方法，说明还不够抽象，抽象的不够彻底，接口说干脆一不做二不休，规定只能写抽象方法算了，所以说接口是比抽象方法更抽象的类。</p><p>举个例子：</p><pre><code class="java">public interface MyIinterface {    /**     * 接口里面只有常量和抽象方法     */    /*public static final   接口中常量定义时都有这个，写不写都是这样*/String MAX_GREAD = &quot;BOSS&quot;;    int MAX_SPEED = 120;    /*public abstatic  这里一样写不写都是public，因为不用public的话没有意义*/ void test01();    public int test02(int a, int b);}</code></pre><p>有的人说不能被继承，不是和抽象类一样吗？为什么不写abstract关键字呢？不能被普通方法调用，不是静态变量吗？是的，说的都对，所以JDK这里不管你写不写，都是默认前面有这些修饰词的，上面我写的很明白！</p><p>上面有句话说不同public的话没有意义，其实写到这里我们可以基本认为接口和抽象类是一种规则了，它规定你这样用，你只要继承或者实现，就必须要按照他的来，所以我们对应到现实生活中的话，就是说是一种规则，既然是规则就是给别人看的，你一个公司制定出来了规章制度，不公布，别人怎么遵守？一个道理，如果不用public修饰别人引用不到，和不规定是一样的。所以JDK也明白，所以这里的方法你写不写public他都默认帮你加上！</p><p>下面讲实现</p><p>我们说了，抽象类也好，接口也好，不继承，不实现都是没有意义的，但是因为接口里面只有抽象方法，所以他必须被实现才有意义，不然就会被垃圾回收机制System.gc给回收掉，前面的文章说过了垃圾回收的原理，这里不做赘述，但是为什么不继承呢？有人说了？既然要被实现里面的方法，直接继承不行了吗？是的，但是类的继承只能是单继承，所以，如果一个类里面有很多的接口，怎么做？所以只能是实现！</p><p>但是有人说了，如果很多接口，最后一个继承了上面的所有接口，那我实现的时候是不是需要实现所有接口的方法？答案是肯定的：</p><p>举个例子：</p><pre><code class="java">package com.gaojizu.TestInterface;/** * 测试接口的多继承 * @author admin * */public interface InterFaceA {    void aaa();}/** * 接口B * @author admin * */interface InterFaceB{    void bbb();}/** * 接口C * @author admin * */interface InterFaceC extends InterFaceA,InterFaceB{    void ccc();}/** * 实现类 * @author admin * */class TestClass implements InterFaceC{    @Override    public void aaa() {        System.out.println(&quot;TestClass.aaa()&quot;);    }    @Override    public void bbb() {        System.out.println(&quot;TestClass.bbb()&quot;);    }    @Override    public void ccc() {       System.out.println(&quot;TestClass.ccc()&quot;);    }}</code></pre><p>其实这里也不难理解，继承了就是拥有了父接口的抽象方法，自然就必须实现他。</p><p>那有人说了，我这里如果在子类里面声明了一个变量，那我直接用父接口的对象调用行不行呢？</p><p>举个例子：</p><pre><code class="java">class Plane implements FlyAble{    String name;    @Override    public void fly() {        System.out.println(&quot;我可以飞&quot;);    }}</code></pre><p>这里有一个name，我测试的时候是不是可以直接使用呢？当然不是，需要强制转换：</p><p>看例子：</p><pre><code class="java">    public static void main(String[] args) {        /**         * 这里的接口是不可以自己实例化自己的，原因和抽象类是一样的，里面只有抽象方法，没有实现的，所以是实例化没有意义的         * 那么直接f是不可以调出子类里面的属性的，原因很简单，他是FlyAble的对象，那么他就只能找到自己下面的属性和方法         * 是没有办法知道子类的属性和方法的，想知道的话，就强制转换为子类的对象就行了。下面是例子         */        FlyAble f = new Plane();        //强制转换为Plane类        Plane p = (Plane)f;        p.name = &quot;test&quot;;    }</code></pre><p>其实这里用我们生活中的例子也是一样可以理解的，我们有一个会飞的类，他创建了一个天鹅的对象出来，天鹅说我会下蛋，那按照我们代码的逻辑来想，会飞的应该都会下蛋，显然不是，飞机也会飞，但是不会下蛋，怎么可以下蛋呢？将实例化出来的对象给一个具体使用的类，也就是天鹅！这里也是多态的一个体现，你给一个笼统的概念，然后具体的使用是什么就是什么的思想！</p><p>最后一点：实现是可以多实现的！</p><p>前面我们说接口的继承是可以多继承的，看明白，是接口可以多继承，类一样是单继承，实现是可以多实现的，你说我既可以飞，也可以跑，飞和跑在两个接口里面怎么办？可以同时实现：</p><p>看例子：</p><pre><code class="java">public interface FlyAble {    int MAX_SPEED = 11000;    int MIN_SPEED = 1;    void fly();}/** * 攻击的接口 * @author admin * */interface Attack{    void tack();}class Plane implements FlyAble{    String name;    @Override    public void fly() {        System.out.println(&quot;我可以飞&quot;);    }}/** * 可以实现多个接口 * @author admin * */class men implements FlyAble,Attack{    @Override    public void tack() {        System.out.println(&quot;我可以攻击&quot;);    }    @Override    public void fly() {        System.out.println(&quot;我可以飞&quot;);    }}</code></pre><p>那么接口存在的意义就不用说了吧，很明显了，为了更好的将设计与实现分离。</p><p>设计师写完需要的接口，别的不用管了，怎么实现是下面的事情了，这样不仅仅可以提高开发效率，也可以更好的维护。当然如果只有一个人开发，那就没必要分接口和类了！</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;首先简单的介绍一下抽象类：&lt;/p&gt;
+&lt;p&gt;定义是很简单的，我们这里不写官方的语言，我自己看着都烦，我们就用白话介绍，抽象类本质是一个类，没问题，那么类里面一般都是有方法的，方法包括方法名和方法体，这是常识对不对，那么什么是抽象类呢？如果一个类里面有一种方法只有方法名却没有方
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>mysql5.7.23修改root密码</title>
+    <link href="http://yoursite.com/2019/05/31/mysql5-7-23%E4%BF%AE%E6%94%B9root%E5%AF%86%E7%A0%81/"/>
+    <id>http://yoursite.com/2019/05/31/mysql5-7-23修改root密码/</id>
+    <published>2019-05-31T12:36:53.000Z</published>
+    <updated>2019-06-14T12:00:28.896Z</updated>
+    
+    <content type="html"><![CDATA[<p>1.官网下载mysql-5.7.23-winx64.zip， 不是installer;</p><p>2.解压缩，配置环境变量-&gt;bin/</p><p>3.解压的目录下新建my.ini,以下内容：</p><p>[mysqld]<br>basedir=D:\Program Files\mysql-5.7\<br>datadir=D:\Program Files\mysql-5.7\data\<br>port=3306<br>skip-grant-tables</p><p>#basedir表示mysql安装路径</p><p>#datadir表示mysql数据文件存储路径</p><p>#port表示mysql端口</p><p>#skip-grant-tables表示忽略密码<br>4.administrator-&gt;cmd:<br>6.启动管理员模式下的CMD，并将路径切换至mysql下的bin目录，然后输入 mysqld –install 安装mysql<br>7.输入 net start mysql 启动mysql服务<br>8.再输入 mysqld –initialize-insecure –user=mysql; 初始化数据文件<br>9.然后再次启动mysql 然后用命令 mysql –u root –p 进入mysql管理界面（密码可为空）<br>10.进入界面后更改root密码：update mysql.user set authentication_string=password(‘123456’) where user=’root’ and Host = ‘localhost’;<br>11.输入flush privileges 刷新权限<br>12.修改 my.ini文件删除最后一句skip-grant-tables<br>13.输入exit退出；<br>14.再次输入mysql -u root -p; 输入密码123456就可以登录啦！！！</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;1.官网下载mysql-5.7.23-winx64.zip， 不是installer;&lt;/p&gt;
+&lt;p&gt;2.解压缩，配置环境变量-&amp;gt;bin/&lt;/p&gt;
+&lt;p&gt;3.解压的目录下新建my.ini,以下内容：&lt;/p&gt;
+&lt;p&gt;[mysqld]&lt;br&gt;basedir=D:\Prog
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>(Spring Cloud微服务实战-书中之坑)分布式服务跟踪：Spring Cloud Sleuth 快速入门</title>
+    <link href="http://yoursite.com/2019/05/27/post-title-with-whitespace/"/>
+    <id>http://yoursite.com/2019/05/27/post-title-with-whitespace/</id>
+    <published>2019-05-27T03:47:30.000Z</published>
+    <updated>2019-06-14T12:00:28.896Z</updated>
+    
+    <content type="html"><![CDATA[<p>按照书中的快速入门案例，在pom.xml文件中加入eureka和ribbon依赖</p><pre><code>&lt;artifactId&gt;spring-cloud-starter-eureka&lt;/artifactId&gt;&lt;artifactId&gt;spring-cloud-starter-ribbon&lt;/artifactId&gt;</code></pre><p>分别实现trace-1和trace-2接口，发送POST请求出错：<br><br></p><p><html><body><h1>Whitelabel Error Page</h1><p>This application has no explicit mapping for /error, so you are seeing this as a fallback.</p><div id="created">Wed May 15 20:39:45 CST 2019</div><div>There was an unexpected error (type=Method Not Allowed, status=405).</div><div>Request method &#39;POST&#39; not supported</div></body></html><br><br><br>解决办法：<br>依赖改为：<br></p><p><artifactid>spring-cloud-starter-netflix-eureka-server</artifactid><br></p><p><artifactid>spring-cloud-starter-netflix-ribbon</artifactid><br><br><br><br>只需要把trace1的RequestMethod.GET改为POST即可，trace2不需要改<br><br>@RequestMapping(value = “/trace-1”, method = RequestMethod.POST)<br><br>    public String trace(){<br><br>        System.out.println(“===call trace-1===”);<br><br>        return restTemplate().getForEntity(“<a href="http://TRACE-2/trace-2&quot;" target="_blank" rel="noopener">http://TRACE-2/trace-2&quot;</a>, String.class).getBody();<br>    }<br><br><br> @RequestMapping(value = “/trace-2”, method = RequestMethod.GET)<br><br>    public String trace(){<br><br>        System.out.println(“===<call trace-2>===”);<br><br>        return “Trace”;<br><br>    }<br><br>    版本问题是个令人头疼的问题，书中也有各种坑ヽ(ー_ー)ノ</call></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;按照书中的快速入门案例，在pom.xml文件中加入eureka和ribbon依赖&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;artifactId&amp;gt;spring-cloud-starter-eureka&amp;lt;/artifactId&amp;gt;
+&amp;lt;artifactId&amp;g
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
