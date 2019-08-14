@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-08-14T08:16:04.639Z</updated>
+  <updated>2019-08-14T08:31:33.423Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,20 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>201908141629</title>
+    <link href="http://yoursite.com/2019/08/14/201908141629/"/>
+    <id>http://yoursite.com/2019/08/14/201908141629/</id>
+    <published>2019-08-14T08:31:33.000Z</published>
+    <updated>2019-08-14T08:31:33.423Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>201908141615</title>
@@ -94,7 +108,7 @@
     <published>2019-05-31T12:36:53.000Z</published>
     <updated>2019-06-14T12:00:28.896Z</updated>
     
-    <content type="html"><![CDATA[<p>1.官网下载mysql-5.7.23-winx64.zip， 不是installer;</p><p>2.解压缩，配置环境变量-&gt;bin/</p><p>3.解压的目录下新建my.ini,以下内容：</p><p>[mysqld]<br>basedir=D:\Program Files\mysql-5.7\<br>datadir=D:\Program Files\mysql-5.7\data\<br>port=3306<br>skip-grant-tables</p><p>#basedir表示mysql安装路径</p><p>#datadir表示mysql数据文件存储路径</p><p>#port表示mysql端口</p><p>#skip-grant-tables表示忽略密码<br>4.administrator-&gt;cmd:<br>6.启动管理员模式下的CMD，并将路径切换至mysql下的bin目录，然后输入 mysqld –install 安装mysql<br>7.输入 net start mysql 启动mysql服务<br>8.再输入 mysqld –initialize-insecure –user=mysql; 初始化数据文件<br>9.然后再次启动mysql 然后用命令 mysql –u root –p 进入mysql管理界面（密码可为空）<br>10.进入界面后更改root密码：update mysql.user set authentication_string=password(‘123456’) where user=’root’ and Host = ‘localhost’;<br>11.输入flush privileges 刷新权限<br>12.修改 my.ini文件删除最后一句skip-grant-tables<br>13.输入exit退出；<br>14.再次输入mysql -u root -p; 输入密码123456就可以登录啦！！！</p>]]></content>
+    <content type="html"><![CDATA[<p>1.官网下载mysql-5.7.23-winx64.zip， 不是installer;</p><p>2.解压缩，配置环境变量-&gt;bin/</p><p>3.解压的目录下新建my.ini,以下内容：</p><p>[mysqld]<br>basedir=D:\Program Files\mysql-5.7<br>datadir=D:\Program Files\mysql-5.7\data<br>port=3306<br>skip-grant-tables</p><p>#basedir表示mysql安装路径</p><p>#datadir表示mysql数据文件存储路径</p><p>#port表示mysql端口</p><p>#skip-grant-tables表示忽略密码<br>4.administrator-&gt;cmd:<br>6.启动管理员模式下的CMD，并将路径切换至mysql下的bin目录，然后输入 mysqld –install 安装mysql<br>7.输入 net start mysql 启动mysql服务<br>8.再输入 mysqld –initialize-insecure –user=mysql; 初始化数据文件<br>9.然后再次启动mysql 然后用命令 mysql –u root –p 进入mysql管理界面（密码可为空）<br>10.进入界面后更改root密码：update mysql.user set authentication_string=password(‘123456’) where user=’root’ and Host = ‘localhost’;<br>11.输入flush privileges 刷新权限<br>12.修改 my.ini文件删除最后一句skip-grant-tables<br>13.输入exit退出；<br>14.再次输入mysql -u root -p; 输入密码123456就可以登录啦！！！</p>]]></content>
     
     <summary type="html">
     
@@ -118,7 +132,7 @@
     <published>2019-05-27T03:47:30.000Z</published>
     <updated>2019-06-14T12:00:28.896Z</updated>
     
-    <content type="html"><![CDATA[<p>按照书中的快速入门案例，在pom.xml文件中加入eureka和ribbon依赖</p><pre><code>&lt;artifactId&gt;spring-cloud-starter-eureka&lt;/artifactId&gt;&lt;artifactId&gt;spring-cloud-starter-ribbon&lt;/artifactId&gt;</code></pre><p>分别实现trace-1和trace-2接口，发送POST请求出错：<br><br></p><p><html><body><h1>Whitelabel Error Page</h1><p>This application has no explicit mapping for /error, so you are seeing this as a fallback.</p><div id="created">Wed May 15 20:39:45 CST 2019</div><div>There was an unexpected error (type=Method Not Allowed, status=405).</div><div>Request method &#39;POST&#39; not supported</div></body></html><br><br><br>解决办法：<br>依赖改为：<br></p><p><artifactid>spring-cloud-starter-netflix-eureka-server</artifactid><br></p><p><artifactid>spring-cloud-starter-netflix-ribbon</artifactid><br><br><br><br>只需要把trace1的RequestMethod.GET改为POST即可，trace2不需要改<br><br>@RequestMapping(value = “/trace-1”, method = RequestMethod.POST)<br><br>    public String trace(){<br><br>        System.out.println(“===call trace-1===”);<br><br>        return restTemplate().getForEntity(“<a href="http://TRACE-2/trace-2&quot;" target="_blank" rel="noopener">http://TRACE-2/trace-2&quot;</a>, String.class).getBody();<br>    }<br><br><br> @RequestMapping(value = “/trace-2”, method = RequestMethod.GET)<br><br>    public String trace(){<br><br>        System.out.println(“===<call trace-2>===”);<br><br>        return “Trace”;<br><br>    }<br><br>    版本问题是个令人头疼的问题，书中也有各种坑ヽ(ー_ー)ノ</call></p>]]></content>
+    <content type="html"><![CDATA[<p>按照书中的快速入门案例，在pom.xml文件中加入eureka和ribbon依赖</p><pre><code>&lt;artifactId&gt;spring-cloud-starter-eureka&lt;/artifactId&gt;&lt;artifactId&gt;spring-cloud-starter-ribbon&lt;/artifactId&gt;</code></pre><p>分别实现trace-1和trace-2接口，发送POST请求出错：<br><br></p><html><body><h1>Whitelabel Error Page</h1><p>This application has no explicit mapping for /error, so you are seeing this as a fallback.</p><div id="created">Wed May 15 20:39:45 CST 2019</div><div>There was an unexpected error (type=Method Not Allowed, status=405).</div><div>Request method &#39;POST&#39; not supported</div></body></html><br>解决办法：依赖改为：<br><artifactid>spring-cloud-starter-netflix-eureka-server</artifactid><br><artifactid>spring-cloud-starter-netflix-ribbon</artifactid><br><br>只需要把trace1的RequestMethod.GET改为POST即可，trace2不需要改<br>@RequestMapping(value = "/trace-1", method = RequestMethod.POST)<br>    public String trace(){<br>        System.out.println("===call trace-1===");<br>        return restTemplate().getForEntity("http://TRACE-2/trace-2", String.class).getBody();    }<br><br> @RequestMapping(value = "/trace-2", method = RequestMethod.GET)<br>    public String trace(){<br>        System.out.println("===<call trace-2>===");<br>        return "Trace";<br>    }<br>    版本问题是个令人头疼的问题，书中也有各种坑ヽ(ー_ー)ノ</call>]]></content>
     
     <summary type="html">
     
