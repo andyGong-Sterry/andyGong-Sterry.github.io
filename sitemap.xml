@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2019/08/14/201908141615/</loc>
+    
+    <lastmod>2019-08-14T08:16:04.639Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2019/08/14/20190814/</loc>
     
     <lastmod>2019-08-14T03:19:23.237Z</lastmod>
@@ -9,14 +16,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/06/17/hello-world/</loc>
-    
-    <lastmod>2019-06-14T12:00:28.896Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/05/27/post-title-with-whitespace/</loc>
+    <loc>http://yoursite.com/2019/05/31/mysql5-7-23%E4%BF%AE%E6%94%B9root%E5%AF%86%E7%A0%81/</loc>
     
     <lastmod>2019-06-14T12:00:28.896Z</lastmod>
     
@@ -30,7 +30,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/05/31/mysql5-7-23%E4%BF%AE%E6%94%B9root%E5%AF%86%E7%A0%81/</loc>
+    <loc>http://yoursite.com/2019/06/17/hello-world/</loc>
+    
+    <lastmod>2019-06-14T12:00:28.896Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/05/27/post-title-with-whitespace/</loc>
     
     <lastmod>2019-06-14T12:00:28.896Z</lastmod>
     
